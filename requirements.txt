@@ -8,6 +8,3 @@ pandas==2.2.2
 opencv-python-headless==4.10.0.84
 pyttsx3==2.90
 pyopengl==3.1.7
-
-
-
