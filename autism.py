@@ -2,7 +2,7 @@ import streamlit as st
 from skimage.io import imread
 from skimage.transform import resize
 import numpy as np
-from tensorflow.keras.models import load_model
+import tensorflow as tf
 import cv2
 import base64
 import pyttsx3
@@ -35,7 +35,7 @@ if __name__ == '__main__':
     add_bg_from_local('ak.png')
 
 # Load the trained model
-model = load_model('autism_1.h5')
+model = tf.keras.models.load_model('autism_1.h5')
 
 # Define a function to preprocess the image
 def preprocess_image(img):
