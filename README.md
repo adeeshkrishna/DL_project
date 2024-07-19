@@ -9,13 +9,13 @@ The goal of this project is to develop a deep learning model that predicts wheth
 
 # Table of Contents
 
-Background
-Dataset
-Data Preprocessing
-Model Development
-Prediction and Web App
-Results and Insights
-Conclusion
+- Background
+- Dataset
+- Data Preprocessing
+- Model Development
+- Prediction and Web App
+- Results and Insights
+- Conclusion
 
 
 # Background
