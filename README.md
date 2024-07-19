@@ -49,3 +49,10 @@ The deep learning model provides predictions about whether a child is likely to 
 
 # Conclusion
 This deep learning project showcases the application of CNNs in the field of autism detection from facial images. By combining sophisticated image analysis with a user-friendly web application, the project contributes to early detection efforts and enhances the support available for children with ASD.
+
+# Camera Access Issue
+If you encounter issues accessing the webcam in the deployed app, it may be due to browser or deployment environment restrictions. Here are some tips to address this:
+
+- Browser Permissions: Ensure your browser has permission to access the webcam. Check your browser settings and grant access if prompted.
+- Deployment Platform: Some platforms may restrict webcam access due to security reasons.
+  Consider running the app locally if you face issues with webcam functionality in the deployed version.
