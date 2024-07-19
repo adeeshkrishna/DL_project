@@ -166,8 +166,7 @@ with tab3:
 
     with tab_2:
         st.write("**Prepare for Image Capture**")
-        st.write("Please ensure you are in a well-lit area and ready to capture your image.")
-        st.write("When you are ready, click the button below to start capturing.")
+        st.write("Please ensure you are in a well-lit area and when you are ready, click the button below to start capturing.")
         if st.button("CAPTURE", key='capture'):
             image = capture_frame()
             if image is not None:
