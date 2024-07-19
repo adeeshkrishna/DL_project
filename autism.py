@@ -47,20 +47,6 @@ def preprocess_image(img):
     img_reshape = img_resized.reshape(1, 150, 150, 1)  # Add batch dimension
     return img_reshape
 
-# Webcam function
-def webcam():
-    webcam = cv2.VideoCapture(0)
-    img = None
-    while True:
-        success, img = webcam.read()
-        if success:
-            cv2.imshow("Video", img)
-            if cv2.waitKey(1) & 0xFF == ord("q"):
-                break
-    webcam.release()
-    cv2.destroyAllWindows()
-    return img
-
 # Initialize session state
 if 'captured_img' not in st.session_state:
     st.session_state['captured_img'] = None
@@ -130,75 +116,38 @@ with tab2:
 
 with tab3:
     st.header("Prediction")
-    st.write('Upload a facial image or capture a facial image to predict whether a child is autistic or not.')
-    tab_1, tab_2 = st.tabs([":large_blue_diamond: Upload Image", ":large_blue_diamond: Capture Image"])
+    st.write('Upload a facial image to predict whether a child is autistic or not.')
 
-    with tab_1:
-        uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
+    uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
 
-        if uploaded_file is not None:
-            try:
-                img = imread(uploaded_file)  # Read image
-                st.image(img, caption='Uploaded Image.', use_column_width=True)
+    if uploaded_file is not None:
+        try:
+            img = imread(uploaded_file)  # Read image
+            st.image(img, caption='Uploaded Image.', use_column_width=True)
 
-                with st.spinner('Processing...'):
-                    # Preprocess the image
-                    image = preprocess_image(img)
+            with st.spinner('Processing...'):
+                # Preprocess the image
+                image = preprocess_image(img)
 
-                if st.button('PREDICT', key='upload_predict'):
-                    # Display the result
-                    predictions = model.predict(image)
-                    prediction = np.argmax(predictions, axis=1)  # Get the predicted class
-                    if prediction == 1:
-                        st.success("The model predicts: **Child is not Autistic**")
-                    else:
-                        st.success("The model predicts: **Child is Autistic**")
+            if st.button('PREDICT', key='upload_predict'):
+                # Display the result
+                predictions = model.predict(image)
+                prediction = np.argmax(predictions, axis=1)  # Get the predicted class
+                if prediction == 1:
+                    st.success("The model predicts: **Child is not Autistic**")
+                else:
+                    st.success("The model predicts: **Child is Autistic**")
 
-                    # Text-to-speech
-                    cat = "not autistic" if prediction == 1 else "autistic"
-                    txt_sp = pyttsx3.init()
-                    txt_sp.say(f"The model predicts: The child is {cat}")
-                    txt_sp.runAndWait()
+                # Text-to-speech
+                cat = "not autistic" if prediction == 1 else "autistic"
+                txt_sp = pyttsx3.init()
+                txt_sp.say(f"The model predicts: The child is {cat}")
+                txt_sp.runAndWait()
 
-            except Exception as e:
-                st.error(f"An error occurred: {e}")
-        else:
-            st.info("Please upload an image file.")
-
-    with tab_2:
-        if st.button(" CAPTURE", key='capture'):
-            image = webcam()
-            if image is not None:
-                st.session_state['captured_img'] = image
-                image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-
-        if st.session_state['captured_img'] is not None:
-            try:
-                image = cv2.cvtColor(st.session_state['captured_img'], cv2.COLOR_BGR2RGB)
-                st.image(image, caption='Captured Image.', use_column_width=True)
-
-                with st.spinner('Processing...'):
-                    # Preprocess the image
-                    img_resized = resize(image, (150, 150, 1), anti_aliasing=True)  # Resize image to match model input shape
-                    img_reshape = img_resized.reshape(1, 150, 150, 1)
-
-                if st.button('PREDICT', key='capture_predict'):
-                    # Display the result
-                    predictions = model.predict(img_reshape)
-                    prediction = np.argmax(predictions, axis=1)  # Get the predicted class
-                    if prediction == 1:
-                        st.success("The model predicts: **Child is not Autistic**")
-                    else:
-                        st.success("The model predicts: **Child is Autistic**")
-
-                    # Text-to-speech
-                    cat = "not autistic" if prediction == 1 else "autistic"
-                    txt_sp = pyttsx3.init()
-                    txt_sp.say(f"The model predicts: The child is {cat}")
-                    txt_sp.runAndWait()
-
-            except Exception as e:
-                st.error(f"An error occurred: {e}")
+        except Exception as e:
+            st.error(f"An error occurred: {e}")
+    else:
+        st.info("Please upload an image file.")
 
 with tab4:
     st.header("Conclusion")
