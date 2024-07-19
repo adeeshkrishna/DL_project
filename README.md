@@ -16,6 +16,7 @@ The goal of this project is to develop a deep learning model that predicts wheth
 - Prediction and Web App
 - Results and Insights
 - Conclusion
+- Camera Access Issue
 
 
 # Background
