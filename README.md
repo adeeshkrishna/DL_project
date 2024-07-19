@@ -27,22 +27,22 @@ The dataset for this project consists of facial images categorized by autism dia
 # Data Preprocessing
 The preprocessing steps for this project include:
 
-Image Resizing: Adjusting image dimensions to fit the model's input requirements.
-Grayscale Conversion: Converting images to grayscale to standardize input.
-Normalization: Scaling pixel values to prepare the data for model training.
+- Image Resizing: Adjusting image dimensions to fit the model's input requirements.
+- Grayscale Conversion: Converting images to grayscale to standardize input.
+- Normalization: Scaling pixel values to prepare the data for model training.
 
 # Model Development
 A Convolutional Neural Network (CNN) was chosen for this deep learning project due to its effectiveness in image classification tasks. Key steps in model development include:
 
-Designing a CNN architecture suitable for binary classification.
-Training the model on preprocessed facial images.
-Evaluating model performance through accuracy metrics and validation.
+- Designing a CNN architecture suitable for binary classification.
+- Training the model on preprocessed facial images.
+- Evaluating model performance through accuracy metrics and validation.
 
 # Prediction and Web App
 A Streamlit web app has been created to interact with the deep learning model. Users can choose between two options:
 
-Upload Image: Upload a facial image for prediction.
-Capture Image: Use the webcam to capture an image and obtain predictions directly.
+- Upload Image: Upload a facial image for prediction.
+- Capture Image: Use the webcam to capture an image and obtain predictions directly.
 
 # Results and Insights
 The deep learning model provides predictions about whether a child is likely to be autistic based on facial images. The web app makes it easy for users to test the model and obtain results in real-time. This tool aims to support early autism detection and provide valuable insights for further research.
