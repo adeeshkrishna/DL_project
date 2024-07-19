@@ -50,9 +50,6 @@ def preprocess_image(img):
     img_reshape = img_resized.reshape(1, 150, 150, 1)  # Add batch dimension
     return img_reshape
 
-# Initialize session state
-if 'captured_img' not in st.session_state:
-    st.session_state['captured_img'] = None
 
 # Streamlit app interface
 st.title(':blue[Autism Detection from Facial Image]')
