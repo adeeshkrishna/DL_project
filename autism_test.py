@@ -53,14 +53,16 @@ def preprocess_image(img):
 
 # Capture a frame from webcam
 def capture_frame():
-    webcam = cv2.VideoCapture(2)
+    webcam = cv2.VideoCapture(0)
     if not webcam.isOpened():
         st.error("Webcam not accessible")
+        print("Webcam not accessible")  # Debug statement
         return None
     ret, frame = webcam.read()
     webcam.release()
     if not ret:
         st.error("Failed to capture image")
+        print("Failed to capture image")  # Debug statement
         return None
     return frame
 
@@ -177,43 +179,4 @@ with tab3:
         if st.session_state['captured_img'] is not None:
             try:
                 image = cv2.cvtColor(st.session_state['captured_img'], cv2.COLOR_BGR2RGB)
-                st.image(image, caption='Captured Image.', use_column_width=True)
-
-                with st.spinner('Processing...'):
-                    # Preprocess the image
-                    img_resized = resize(image, (150, 150, 1),
-                                         anti_aliasing=True)  # Resize image to match model input shape
-                    img_reshape = img_resized.reshape(1, 150, 150, 1)
-
-                if st.button('PREDICT', key='capture_predict'):
-                    # Display the result
-                    predictions = model.predict(img_reshape)
-                    prediction = np.argmax(predictions, axis=1)  # Get the predicted class
-                    if prediction == 1:
-                        st.success("The model predicts: **Child is not Autistic**")
-                    else:
-                        st.success("The model predicts: **Child is Autistic**")
-
-            except Exception as e:
-                st.error(f"An error occurred: {e}")
-
-with tab4:
-    st.header("Conclusion")
-    st.write("""
-    This project demonstrates the potential of using deep learning for the early detection of Autism Spectrum Disorder (ASD) based on facial images.
-    While the model shows promising results, it is important to note that it is not a diagnostic tool. Further validation and testing
-    with larger and more diverse datasets are necessary to improve the model's accuracy and reliability.
-
-    Future work could involve integrating this model into a comprehensive screening tool that combines various data sources,
-    including behavioral assessments and medical history, to provide a more holistic view of the child's development.
-
-    We hope this project sparks further research and development in the field of autism detection and contributes to the overall efforts
-    in improving the quality of life for individuals with ASD.
-    """)
-
-    st.link_button(':link: Link to my Colab Notebook',
-                   "https://colab.research.google.com/drive/1vyf54LvRAlDJPFfBrrz5kl7__IFYOS9u", help='Colab Notebook',
-                   type="secondary", disabled=False, use_container_width=False)
-    st.link_button(':link: Link to Research Paper',
-                   "https://www.researchgate.net/publication/350396741_Detecting_autism_from_facial_image",
-                   help='Research Paper', type="secondary", disabled=False, use_container_width=False)
+                st.image(image, caption='Captured Image.', use
