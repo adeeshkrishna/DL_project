@@ -53,7 +53,7 @@ def preprocess_image(img):
 
 # Capture a frame from webcam
 def capture_frame():
-    webcam = cv2.VideoCapture(1)
+    webcam = cv2.VideoCapture(2)
     if not webcam.isOpened():
         st.error("Webcam not accessible")
         return None
